@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Home</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; }
+
+  :root {
+    --bg: #FDF3E3;
+    --card: #FFFDF9;
+    --border: #EFE3CC;
+    --text-dark: #2E2A1F;
+    --text-muted: #6B6455;
+    --green: #4F7A3B;
+    --green-light: #E3EBD8;
+    --orange: #E0932E;
+    --orange-light: #F3E2C4;
+    --pink-light: #F6DCDA;
+    --blue-light: #DCE8ED;
+    --radius: 14px;
+    --vh: 1vh; /* set by JS below to handle real mobile viewport height */
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    max-width: 480px;
+    margin: 0 auto;
+    height: calc(var(--vh, 1vh) * 100);
+    display: flex;
+    flex-direction: column;
+    padding: 10px 14px 8px;
+  }
+
+  header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-shrink: 0; }
+  header h1 { font-size: clamp(15px, 4.5vw, 19px); font-weight: 700; }
+  .greeting { color: var(--orange); font-size: clamp(11px, 3.2vw, 13px); font-weight: 600; margin-top: 2px; }
+  .date { color: var(--text-muted); font-size: clamp(10px, 3vw, 12px); margin-top: 1px; }
+  .sun { width: 24px; height: 24px; flex-shrink: 0; }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 110px 110px;
+  gap: 7px;
+  margin-bottom: 8px;
+  height: 227px;
+  flex: 0 0 227px;
+  min-height: 227px;
+}
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 9px;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .card:active { transform: scale(0.98); }
+
+  .icon-circle {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 4px;
+    flex-shrink: 0;
+  }
+  .icon-circle svg { width: 14px; height: 14px; }
+
+  .card-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 2px;
+}
+  .card-sub { font-size: clamp(9.5px, 2.7vw, 11px); color: var(--text-muted); line-height: 1.2; }
+  .arrow { float: right; color: var(--text-muted); font-size: 14px; }
+
+  .banner {
+    background: var(--green-light);
+    border-radius: var(--radius);
+    padding: 8px 11px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .banner .heart-circle {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(79,122,59,0.15);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .banner p { font-size: clamp(10.5px, 3vw, 12px); font-weight: 600; color: #3F5F30; flex: 1; }
+  .banner .chev { color: #3F5F30; font-size: 15px; }
+
+  .section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; flex-shrink: 0; }
+  .section-head h2 { font-size: clamp(13px, 3.8vw, 15px); font-weight: 700; }
+  .view-schedule { display: flex; align-items: center; gap: 4px; color: var(--green); font-size: 10.5px; font-weight: 600; background: none; border: none; font-family: inherit; cursor: pointer; }
+
+  /* --- Today's Plan: only THIS section scrolls if content overflows,
+         everything else above/below stays fixed on screen --- */
+  .plan-list {
+    flex-shrink: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 30vh;
+  }
+
+  .plan-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 9px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-shrink: 0;
+  }
+
+  .plan-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .plan-body { flex: 1; min-width: 0; }
+  .plan-time { font-size: 9.5px; color: var(--text-muted); }
+  .plan-title { font-size: 12.5px; font-weight: 700; }
+  .plan-desc { font-size: 9.5px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .btn {
+    border: none;
+    border-radius: 9px;
+    padding: 6px 9px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .btn-done { background: var(--green); }
+  .btn-done.done { background: #A7B99A; }
+  .btn-remind { background: var(--orange); }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 6px 11px;
+    margin: 8px 0;
+    flex-shrink: 0;
+  }
+
+  .search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 12.5px;
+    font-family: inherit;
+    color: var(--text-dark);
+    min-width: 0;
+  }
+
+  .icon-btn {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  nav.bottom {
+    flex-shrink: 0;
+    display: flex;
+    align-items: stretch;
+    padding-top: 6px;
+    padding-bottom: env(safe-area-inset-bottom, 4px);
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-home {
+    background: var(--orange-light);
+    border-radius: 13px;
+    padding: 6px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-right: 8px;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .nav-home span { font-size: 9px; font-weight: 700; color: var(--text-dark); }
+
+  .nav-divider { width: 1px; background: var(--border); margin: 2px 6px; }
+  .nav-others { flex: 1; display: flex; justify-content: space-between; }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--text-dark);
+  }
+
+  .nav-item .circ {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-item .circ svg { width: 14px; height: 14px; }
+  .nav-item span { font-size: 8.5px; font-weight: 600; }
+
+  /* Small screens (older/cheap Android, e.g. 360x640) get a bit tighter still */
+  @media (max-height: 640px) {
+    .plan-list { max-height: 22vh; }
+    .grid { gap: 5px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Hello, Mr. Sharma 👋</h1>
+    <div class="greeting" id="greetingText">Good Morning!</div>
+    <div class="date" id="today"></div>
+  </div>
+  <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="#E0932E" stroke-width="2">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/>
+    <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+    <line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/>
+  </svg>
+</header>
+
+<div class="grid">
+  <button class="card" onclick="go('task')">
+    <div class="icon-circle" style="background:var(--green-light)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#4F7A3B" stroke-width="2">
+        <rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3h6v3H9z"/><path d="M8 12l2 2 4-4"/>
+      </svg>
+    </div>
+    <div class="card-title">Your Daily Task <span class="arrow">›</span></div>
+    <div class="card-sub" id="taskSub">Cognitive Memory Game</div>
+  </button>
+
+  <button class="card" onclick="go('memory')">
+    <div class="icon-circle" style="background:var(--pink-light)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#C0554D" stroke-width="2">
+        <path d="M9 3a4 4 0 0 0-4 4 4 4 0 0 0-2 7 4 4 0 0 0 4 4h6a4 4 0 0 0 4-4 4 4 0 0 0-2-7 4 4 0 0 0-4-4z"/>
+      </svg>
+    </div>
+    <div class="card-title">Memory Garden <span class="arrow">›</span></div>
+    <div class="card-sub">Memory Assistant</div>
+  </button>
+
+  <button class="card" onclick="go('trip')">
+    <div class="icon-circle" style="background:var(--blue-light)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#3E7387" stroke-width="2">
+        <path d="M3 20c4-6 6-6 9 0s5-6 9 0"/><path d="M8 8v6M16 6v8"/>
+      </svg>
+    </div>
+    <div class="card-title">Trip Down Memory Lane <span class="arrow">›</span></div>
+    <div class="card-sub">Your Past Memories</div>
+  </button>
+
+  <button class="card" onclick="go('schedule')">
+    <div class="icon-circle" style="background:var(--orange-light)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#B4791E" stroke-width="2">
+        <rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/>
+        <line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/>
+      </svg>
+    </div>
+    <div class="card-title">Scheduled <span class="arrow">›</span></div>
+    <div class="card-sub">Your Daily Routine</div>
+  </button>
+</div>
+
+<div class="banner" onclick="go('progress')">
+  <div class="heart-circle">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4F7A3B" stroke-width="2">
+      <path d="M12 21s-7-4.35-9.5-8.5C1 9 2.5 5 6.5 5c2 0 3.5 1.5 5.5 4 2-2.5 3.5-4 5.5-4 4 0 5.5 4 4 7.5C19 16.65 12 21 12 21z"/>
+    </svg>
+  </div>
+  <p id="progressText">Great job! You completed 0 of 5 games today.</p>
+  <span class="chev">›</span>
+</div>
+
+<div class="section-head">
+  <h2>Today's Plan</h2>
+  <button class="view-schedule" onclick="go('schedule')">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4F7A3B" stroke-width="2">
+      <rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+    Full Schedule
+  </button>
+</div>
+
+<div class="plan-list">
+  <div class="plan-item">
+    <div class="plan-icon" style="background:var(--green-light)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4F7A3B" stroke-width="2">
+        <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+      </svg>
+    </div>
+    <div class="plan-body">
+      <div class="plan-time">10:00 AM</div>
+      <div class="plan-title">Breakfast</div>
+      <div class="plan-desc">Time to enjoy your breakfast.</div>
+    </div>
+    <button class="btn btn-done" id="doneBtn" onclick="markDone()">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+      <span id="doneLabel">I'm Done</span>
+    </button>
+  </div>
+
+  <div class="plan-item">
+    <div class="plan-icon" style="background:var(--orange-light)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B4791E" stroke-width="2">
+        <rect x="7" y="7" width="6" height="14" rx="3" transform="rotate(-45 10 14)"/><line x1="9" y1="9" x2="14" y2="14"/>
+      </svg>
+    </div>
+    <div class="plan-body">
+      <div class="plan-time">12:00 PM</div>
+      <div class="plan-title">Take Medicine</div>
+      <div class="plan-desc">Don't forget to take your medicine.</div>
+    </div>
+    <button class="btn btn-remind" onclick="remindMe(this)">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+      </svg>
+      <span>Remind Me</span>
+    </button>
+  </div>
+</div>
+
+<div class="search-bar">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4F7A3B" stroke-width="2">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  </svg>
+  <input type="text" placeholder="Type here..." id="searchInput">
+  <button class="icon-btn" aria-label="Voice input">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4F7A3B" stroke-width="2">
+      <rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="17" x2="12" y2="21"/>
+    </svg>
+  </button>
+  <button class="icon-btn" aria-label="Camera">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4F7A3B" stroke-width="2">
+      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>
+    </svg>
+  </button>
+</div>
+
+<nav class="bottom">
+  <button class="nav-home" onclick="go('home')">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2E2A1F" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+    <span>Home</span>
+  </button>
+  <div class="nav-divider"></div>
+  <div class="nav-others">
+    <button class="nav-item" onclick="go('family')">
+      <div class="circ" style="background:var(--green-light)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#4F7A3B" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
+      </div>
+      <span>Family</span>
+    </button>
+    <button class="nav-item" onclick="go('photos')">
+      <div class="circ" style="background:var(--orange-light)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#B4791E" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-6-6-9 9"/></svg>
+      </div>
+      <span>Photos</span>
+    </button>
+    <button class="nav-item" onclick="go('music')">
+      <div class="circ" style="background:var(--green-light)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#4F7A3B" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <span>Music</span>
+    </button>
+    <button class="nav-item" onclick="go('relax')">
+      <div class="circ" style="background:var(--orange-light)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#B4791E" stroke-width="2"><path d="M12 3c1 4-3 5-3 9a3 3 0 0 0 6 0c0-4-4-5-3-9z"/></svg>
+      </div>
+      <span>Relax</span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  function setRealVh() {
+    document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+  }
+  setRealVh();
+  window.addEventListener('resize', setRealVh);
+  window.addEventListener('orientationchange', setRealVh);
+  function getGreeting() {
+    const h = new Date().getHours();
+    if (h < 12) return 'Good Morning!';
+    if (h < 17) return 'Good Afternoon!';
+    if (h < 21) return 'Good Evening!';
+    return 'Good Night!';
+  }
+  function renderDateAndGreeting() {
+    document.getElementById('greetingText').textContent = getGreeting();
+    document.getElementById('today').textContent = new Date().toLocaleDateString('en-US', {
+      weekday: 'long', day: 'numeric', month: 'long'
+    });
+  }
+  renderDateAndGreeting();
+  setInterval(renderDateAndGreeting, 60 * 1000);
+
+  const TOTAL_GAMES = 5;
+  let gamesCompleted = 0;
+
+  function updateProgressUI() {
+    document.getElementById('progressText').textContent =
+      `Great job! You completed ${gamesCompleted} of ${TOTAL_GAMES} games today.`;
+    document.getElementById('taskSub').textContent =
+      `Cognitive Memory Game (${gamesCompleted}/${TOTAL_GAMES})`;
+  }
+  updateProgressUI();
+
+  function markGameComplete(gameId) {
+    if (gamesCompleted < TOTAL_GAMES) {
+      gamesCompleted++;
+      updateProgressUI();
+    }
+    /* BACKEND VERSION (replace the two lines above with this):
+       fetch('/api/games/' + gameId + '/complete', { method: 'POST' })
+         .then(res => res.json())
+         .then(data => {
+             gamesCompleted = data.completed; // server returns the true count for today
+             updateProgressUI();
+         });
+    */
+  }
+  window.demoCompleteGame = () => markGameComplete('demo-game-' + Date.now());
+
+  function go(section) {
+    if (section === 'task') { window.demoCompleteGame(); return; } // demo behavior only
+    console.log('navigate:', section);
+  }
+
+  function markDone() {
+    var btn = document.getElementById('doneBtn');
+    var label = document.getElementById('doneLabel');
+    if (!btn.classList.contains('done')) {
+      btn.classList.add('done');
+      label.textContent = 'Done';
+    }
+  }
+
+  function remindMe(btn) {
+    btn.querySelector('span').textContent = 'Reminder set';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+  }
+</script>
+
+</body>
+</html>

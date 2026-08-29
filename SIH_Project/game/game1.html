@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>My People, My Memory</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #F3E7D3;
+    color: #5A4636;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .screen { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .hidden { display: none; }
+
+  .eyebrow { color: #B86F52; font-weight: 700; font-size: 13px; letter-spacing: 1px; margin-bottom: 6px; }
+  h1.title { font-size: 26px; font-weight: 700; margin-bottom: 10px; line-height: 1.2; }
+  .subtitle { color: #806B59; font-size: 15px; margin-bottom: 18px; }
+
+  .card {
+    background: #FFF9F0;
+    border: 1px solid #E2D3C1;
+    border-radius: 14px;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+
+  .start-btn, .primary-btn {
+    background: #B86F52;
+    color: #FFF9F0;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 18px;
+    font-weight: 700;
+    width: 100%;
+    cursor: pointer;
+  }
+  .start-btn:active, .primary-btn:active { background: #9F5B42; }
+
+  .footer-note { color: #806B59; font-size: 12px; margin-top: 14px; }
+
+  /* Question screen */
+  .top-row { display: flex; justify-content: space-between; width: 100%; margin-bottom: 14px; font-weight: 700; color: #5A4636; }
+
+  .avatar {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px; font-weight: 700; color: #fff;
+    margin: 10px auto 18px;
+  }
+
+  .question-text { font-size: 20px; font-weight: 700; margin-bottom: 18px; }
+
+  .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+  .answer-btn {
+    background: #FFF9F0;
+    border: 1px solid #E2D3C1;
+    border-radius: 12px;
+    padding: 14px 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #5A4636;
+    cursor: pointer;
+  }
+  .answer-btn:disabled { cursor: default; }
+  .answer-btn.correct { background: #6F8F72; color: #fff; border-color: #6F8F72; }
+  .answer-btn.wrong { background: #B85C50; color: #fff; border-color: #B85C50; }
+
+  .result-msg { min-height: 22px; font-size: 15px; font-weight: 600; margin-top: 16px; }
+
+  /* Results screen */
+  .score-big { font-size: 26px; font-weight: 700; color: #B86F52; margin: 10px 0 12px; }
+  .details { font-size: 15px; line-height: 1.9; color: #5A4636; }
+
+  .secondary-btn {
+    background: none;
+    border: none;
+    color: #806B59;
+    font-weight: 700;
+    font-size: 13px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div class="screen" id="startScreen">
+  <div class="eyebrow">WELCOME</div>
+  <h1 class="title">MY PEOPLE,<br>MY MEMORY</h1>
+  <p class="subtitle">A gentle memory game using the people you know and love.</p>
+  <div class="card">
+    <div class="eyebrow">LEVEL 1</div>
+    <p style="margin-top:6px;">Look at a familiar face and choose the name that feels right.</p>
+  </div>
+  <button class="start-btn" onclick="startGame()">▶ START GAME</button>
+  <div class="footer-note">Take your time • There is no rush</div>
+</div>
+
+<!-- QUESTION SCREEN -->
+<div class="screen hidden" id="questionScreen">
+  <div class="top-row">
+    <span id="questionCount">Question 1 / 5</span>
+    <span id="scoreLabel">Score: 0</span>
+  </div>
+  <div class="avatar" id="avatar">?</div>
+  <div class="question-text">Who is this?</div>
+  <div class="answers" id="answers"></div>
+  <div class="result-msg" id="resultMsg"></div>
+</div>
+
+<!-- COMPLETION SCREEN -->
+<div class="screen hidden" id="completeScreen">
+  <div class="eyebrow">✨ WELL DONE ✨</div>
+  <h1 class="title" style="font-size:40px;">YAY!</h1>
+  <p class="subtitle" style="font-size:20px; font-weight:700; color:#5A4636;">You completed your first memory game!</p>
+  <div class="card">
+    <p>Every little memory matters.<br>Take a moment to celebrate!</p>
+  </div>
+  <button class="primary-btn" onclick="showResults()">SEE MY RESULTS →</button>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div class="screen hidden" id="resultsScreen">
+  <h1 class="title">YOUR RESULTS</h1>
+  <p class="subtitle">Level 1 completed</p>
+  <div class="card">
+    <div class="score-big" id="finalScore">0 POINTS</div>
+    <div class="details" id="finalDetails"></div>
+  </div>
+  <button class="primary-btn" onclick="startGame()">▶ PLAY AGAIN</button>
+  <button class="secondary-btn" onclick="finishAndReturnHome()">BACK TO HOME (SAVE PROGRESS)</button>
+</div>
+
+<script>
+  // Stand-in avatars — swap these for real photos by replacing the
+  // .avatar div's content with an <img src="photos/dad.jpg"> per person.
+  const familyMembers = [
+    { name: 'Dad',   photo: 'photos/dad.jpg' },
+    { name: 'Lizzy', photo: 'photos/lizzy.jpg' },
+    { name: 'Mom',   photo: 'photos/mom.jpg' },
+    { name: 'Priya', photo: 'photos/priya.jpg' },
+    { name: 'Rahul', photo: 'photos/rahul.jpg' },
+  ];
+
+  const TOTAL_QUESTIONS = 5;
+  let currentQuestion = 0;
+  let score = 0;
+  let correctAnswers = 0;
+  let wrongAnswers = 0;
+  let currentPerson = null;
+  let lastPerson = null;
+  let questionStartTime = 0;
+  let responseTimes = [];
+
+  function show(id) {
+    ['startScreen', 'questionScreen', 'completeScreen', 'resultsScreen'].forEach(function (s) {
+      document.getElementById(s).classList.toggle('hidden', s !== id);
+    });
+  }
+
+  function startGame() {
+    currentQuestion = 0;
+    score = 0;
+    correctAnswers = 0;
+    wrongAnswers = 0;
+    lastPerson = null;
+    responseTimes = [];
+    show('questionScreen');
+    newQuestion();
+  }
+
+  function newQuestion() {
+    currentQuestion++;
+    document.getElementById('questionCount').textContent = 'Question ' + currentQuestion + ' / ' + TOTAL_QUESTIONS;
+    document.getElementById('scoreLabel').textContent = 'Score: ' + score;
+    document.getElementById('resultMsg').textContent = '';
+
+    const available = familyMembers.filter(function (p) { return p !== lastPerson; });
+    currentPerson = available[Math.floor(Math.random() * available.length)];
+    lastPerson = currentPerson;
+
+    const avatar = document.getElementById('avatar');
+    avatar.style.background = 'none';
+    avatar.innerHTML = '<img src="' + currentPerson.photo + '" alt="' + currentPerson.name +
+      '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">';
+
+    createAnswerButtons();
+    questionStartTime = Date.now();
+  }
+
+  function createAnswerButtons() {
+    const wrongOptions = familyMembers
+      .filter(function (p) { return p.name !== currentPerson.name; })
+      .sort(function () { return Math.random() - 0.5; })
+      .slice(0, 3)
+      .map(function (p) { return p.name; });
+
+    const options = [currentPerson.name].concat(wrongOptions).sort(function () { return Math.random() - 0.5; });
+
+    const container = document.getElementById('answers');
+    container.innerHTML = '';
+    options.forEach(function (name) {
+      const btn = document.createElement('button');
+      btn.className = 'answer-btn';
+      btn.textContent = name;
+      btn.onclick = function () { checkAnswer(name, btn); };
+      container.appendChild(btn);
+    });
+  }
+
+  function checkAnswer(selected, btn) {
+    const responseTime = (Date.now() - questionStartTime) / 1000;
+    responseTimes.push(responseTime);
+
+    const allButtons = document.querySelectorAll('.answer-btn');
+    allButtons.forEach(function (b) { b.disabled = true; });
+
+    if (selected === currentPerson.name) {
+      score += 10;
+      correctAnswers++;
+      btn.classList.add('correct');
+      document.getElementById('resultMsg').textContent = "✓ That's right!";
+      document.getElementById('resultMsg').style.color = '#6F8F72';
+    } else {
+      wrongAnswers++;
+      btn.classList.add('wrong');
+      allButtons.forEach(function (b) {
+        if (b.textContent === currentPerson.name) b.classList.add('correct');
+      });
+      document.getElementById('resultMsg').textContent = "That's okay. Let's try the next one.";
+      document.getElementById('resultMsg').style.color = '#806B59';
+    }
+
+    document.getElementById('scoreLabel').textContent = 'Score: ' + score;
+
+    setTimeout(function () {
+      if (currentQuestion >= TOTAL_QUESTIONS) {
+        finishGame();
+      } else {
+        newQuestion();
+      }
+    }, 1200);
+  }
+
+  function finishGame() {
+    saveGameResult();
+    show('completeScreen');
+  }
+
+  function saveGameResult() {
+    // In-browser equivalent of the SQLite save in main.py.
+    const accuracy = TOTAL_QUESTIONS === 0 ? 0 : (correctAnswers / TOTAL_QUESTIONS) * 100;
+    const avgTime = responseTimes.length ? responseTimes.reduce(function (a, b) { return a + b; }, 0) / responseTimes.length : 0;
+
+    const session = {
+      playedAt: new Date().toISOString(),
+      level: 1,
+      totalQuestions: TOTAL_QUESTIONS,
+      score: score,
+      correctAnswers: correctAnswers,
+      wrongAnswers: wrongAnswers,
+      accuracy: accuracy,
+      averageResponseTime: avgTime
+    };
+
+    const sessions = JSON.parse(localStorage.getItem('gameSessions') || '[]');
+    sessions.push(session);
+    localStorage.setItem('gameSessions', JSON.stringify(sessions));
+  }
+
+  function showResults() {
+    const accuracy = (correctAnswers / TOTAL_QUESTIONS) * 100;
+    const avgTime = responseTimes.length ? responseTimes.reduce(function (a, b) { return a + b; }, 0) / responseTimes.length : 0;
+
+    document.getElementById('finalScore').textContent = score + ' POINTS';
+    document.getElementById('finalDetails').innerHTML =
+      'Correct answers: ' + correctAnswers + '<br>' +
+      'Incorrect answers: ' + wrongAnswers + '<br>' +
+      'Accuracy: ' + accuracy.toFixed(0) + '%<br>' +
+      'Average response time: ' + avgTime.toFixed(1) + ' seconds';
+
+    show('resultsScreen');
+  }
+
+  function finishAndReturnHome() {
+    // Mark game 1 as completed for the day, so the home screen shows 1/5.
+    const completed = parseInt(localStorage.getItem('gamesCompleted') || '0', 10);
+    if (completed < 1) {
+      localStorage.setItem('gamesCompleted', '1');
+    }
+    window.location.href = 'tasks.html';
+  }
+</script>
+
+</body>
+</html>
