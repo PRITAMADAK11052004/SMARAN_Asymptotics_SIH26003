@@ -3,10 +3,7 @@
 # SMARAN
 ### Multimodal AI Platform for Cognitive & Elderly Care
 
-**Ek Ehsaas, Yaadon Ke Paas**  
-*Technology in Service of Dignity*
-
-<img src="smaran-splash-logo.png" alt="SMARAN Logo" width="220"/>
+<img src="xyz.png" alt="SMARAN Logo" width="220"/>
 
 <p>
   <strong>
@@ -472,4 +469,433 @@ Database encryption requires correct configuration and secure key management. Us
 
 Offline-first operation is a central design goal of SMARAN.
 
-The application should keep essential patient-facing functionality available without requiring a continuous internet connection wherever the relevant feature and dependencies su
+The application should keep essential patient-facing functionality available without requiring a continuous internet connection wherever the relevant feature and dependencies support offline execution.
+
+### 8.1 How Offline-First Operation Works
+
+```mermaid
+flowchart TD
+    A["User Interaction"] --> B["Flutter Application"]
+    B --> C["Local Application Logic"]
+    C --> D["Local Database"]
+    C --> E["Available On-Device Models"]
+    D --> F["Pending Sync Queue"]
+    F --> G{"Internet Available?"}
+    G -- "No" --> H["Keep Data Locally"]
+    H --> F
+    G -- "Yes" --> I["Secure Synchronization"]
+    I --> J["Authorized Remote Services"]
+    J --> K["Sync Result and Conflict Handling"]
+    K --> D
+```
+
+### 8.2 Offline-First Principles
+
+- **Local availability:** Keep essential features available locally when technically possible.
+- **Local persistence:** Store eligible application data on the device.
+- **Deferred synchronization:** Queue eligible updates when connectivity is unavailable.
+- **Controlled transfer:** Transfer only the data required by the selected synchronization workflow.
+- **Error handling:** Handle interrupted transfers and retry failures safely.
+- **Conflict management:** Define how local and remote changes are reconciled.
+- **User clarity:** Do not imply that remote alerts have been delivered when synchronization has not occurred.
+
+### 8.3 Important Offline Limitations
+
+Offline-first does not mean every feature automatically works without internet access.
+
+Some functions may require network access, additional model downloads, remote services, or compatible device hardware.
+
+For example:
+
+- Local reminders may work offline after correct configuration and permission setup.
+- Local AI inference requires the model and runtime to be installed and supported.
+- Remote caregiver notifications may be delayed while the patient device is offline.
+- Initial account verification or cloud synchronization may require connectivity.
+- Model quality and response speed depend on device resources.
+
+The application should communicate these limitations clearly.
+
+---
+
+## 🔐 9. User Roles and Workflows
+
+### 9.1 Patient Workflow
+
+The patient-facing experience is intended to prioritize simplicity and reassurance.
+
+Potential workflow:
+
+1. Open the application.
+2. View the home screen and orientation information.
+3. Access cognitive games, memories, reminders, or voice assistance.
+4. Receive clear guidance and encouraging feedback.
+5. Complete an activity or acknowledge a reminder.
+6. Continue using available local features even when offline.
+
+The interface should avoid unnecessary navigation complexity and should support older adults with different levels of digital familiarity.
+
+### 9.2 Family Member Workflow
+
+The family-facing experience may allow authorized family members to:
+
+- Add familiar-person information and personal memories.
+- Review relevant updates.
+- Share contextual information with caregivers.
+- Help maintain accurate patient preferences and relationships.
+- Provide support through approved communication features.
+
+Access should be restricted to information that the family member is authorized to view or change.
+
+### 9.3 Caregiver Workflow
+
+The caregiver interface is intended to organize relevant patient information into an actionable overview.
+
+Potential capabilities include:
+
+- Patient status and recent activity.
+- Reminder completion and missed tasks.
+- Cognitive-game history.
+- Important alerts.
+- Patient routine management.
+- Progress summaries and reports.
+- Communication and support coordination.
+
+A caregiver dashboard should emphasize understandable information and practical next steps instead of overwhelming users with unexplained metrics.
+
+### 9.4 Healthcare Professional Workflow
+
+A future or separately implemented professional workflow may support:
+
+- Review of relevant patient information.
+- Longitudinal activity summaries.
+- Caregiver-provided observations.
+- Structured reports.
+- Appropriate clinical-system integration.
+
+Any clinical workflow must define its intended use, access permissions, validation requirements, and limitations before being used in healthcare settings.
+
+---
+
+## ♿ 10. Privacy, Safety, and Accessibility
+
+SMARAN is intended for a sensitive use case involving older adults and personal health-related information. Privacy and usability must therefore be treated as core design requirements.
+
+### 10.1 Privacy and Data Protection
+
+The proposed design principles include:
+
+- Collect only information needed for the selected functionality.
+- Restrict access according to user roles.
+- Protect locally stored sensitive information.
+- Use secure communication for remote data transfer.
+- Manage authentication credentials and encryption keys securely.
+- Obtain appropriate consent for photographs and biometric processing.
+- Provide clear controls for managing personal information.
+- Define retention and deletion procedures.
+- Avoid exposing sensitive information in logs or error messages.
+
+Implementation should be reviewed against applicable Indian data-protection requirements and other relevant regulations.
+
+### 10.2 Dementia-Friendly User Experience
+
+The interface should prioritize:
+
+- Large, readable text.
+- High contrast.
+- Large touch targets.
+- Clear icons accompanied by understandable labels.
+- Simple navigation and predictable layouts.
+- Familiar visual cues.
+- Calm colors and restrained animation.
+- Encouraging, non-judgmental feedback.
+- Clear confirmation before consequential actions.
+- Accessible error recovery.
+
+The intended interaction style should reduce confusion and preserve dignity.
+
+### 10.3 Responsible AI
+
+AI-assisted features should:
+
+- Communicate uncertainty when appropriate.
+- Avoid presenting guesses as facts.
+- Use only relevant and authorized personal context.
+- Provide safe fallback behavior.
+- Avoid unsupported medical diagnoses.
+- Avoid independently changing medication or treatment instructions.
+- Allow human confirmation for important actions.
+- Be tested across supported languages and realistic usage conditions.
+
+### 10.4 Caregiver Alerts
+
+Potential alerts should be designed as prompts for human review rather than definitive medical conclusions.
+
+For example, an unusual change in behavior may justify caregiver attention, but the application should not claim that a particular medical condition is present without appropriate clinical evaluation.
+
+---
+
+## 🧰 11. Technology Stack
+
+The following table summarizes the proposed technology stack based on the project's architecture.
+
+| Layer | Technology | Intended Purpose |
+|---|---|---|
+| Application UI | Flutter | Cross-platform user interface |
+| Programming Language | Dart | Application logic |
+| Cognitive Gaming | Flame | Game rendering and interaction |
+| Local AI Inference | Qwen 1.5B Q4 / llama.cpp | Potential on-device language-model processing |
+| Speech Recognition | AI4Bharat IndicConformer | Regional-language speech recognition |
+| Language Translation | IndicTrans2 | Translation for supported languages |
+| Text-to-Speech | AI4Bharat IndicTTS2 | Spoken responses |
+| Model Execution | ONNX Runtime | Execution of compatible models |
+| Face Processing | MediaPipe / compatible face-embedding model | Face detection and recognition pipeline |
+| Local Database | SQLite | Structured local persistence |
+| Database Abstraction | Drift | Typed database access |
+| Database Encryption | SQLCipher or equivalent | Encrypted local database storage |
+| Background Scheduling | WorkManager / platform scheduling | Eligible background tasks and reminders |
+| Synchronization | REST API / JSON / local queue | Optional remote synchronization |
+| Analytics | Custom application logic | Activity and interaction summaries |
+
+**Technology status:** The technologies above describe the proposed architecture. Verify package compatibility, model availability, platform support, licensing, and actual code integration before claiming that a component is production-ready.
+
+---
+
+## 📂 12. Repository Structure
+
+The repository contains the Flutter/Dart application in the `Smaran(Flutter-Dart)` directory.
+
+The expected high-level structure is:
+
+```text
+SMARAN_Asymptotics_SIH26003/
+│
+├── README.md
+│
+└── Smaran(Flutter-Dart)/
+    ├── android/
+    ├── assets/
+    ├── ios/
+    ├── lib/
+    ├── linux/
+    ├── macos/
+    ├── test/
+    ├── web/
+    ├── windows/
+    ├── pubspec.yaml
+    ├── pubspec.lock
+    └── README.md
+```
+
+This is a representative structure, not a guarantee that every directory exists in every checkout.
+
+### Important Project Files
+
+| File or Directory | Purpose |
+|---|---|
+| `lib/` | Flutter and Dart application source code |
+| `assets/` | Images, icons, fonts, and other bundled assets |
+| `android/` | Android platform configuration |
+| `ios/` | iOS platform configuration |
+| `web/` | Web platform configuration |
+| `windows/` | Windows platform configuration |
+| `linux/` | Linux platform configuration |
+| `macos/` | macOS platform configuration |
+| `test/` | Automated tests, where present |
+| `pubspec.yaml` | Package dependencies and asset configuration |
+| `pubspec.lock` | Resolved Dart and Flutter dependencies |
+
+Large generated build directories and temporary tool caches should generally not be committed to Git.
+
+---
+
+## 🚀 13. Getting Started
+
+### Prerequisites
+
+Install and configure:
+
+- Flutter SDK.
+- Dart SDK, included with Flutter.
+- Android Studio or another supported development environment.
+- Android SDK and the required platform tools.
+- Git.
+
+Verify your installation:
+
+```bash
+flutter doctor
+```
+
+### Step 1: Clone the Team Repository
+
+```bash
+git clone https://github.com/PRITAMADAK11052004/SMARAN_Asymptotics_SIH26003.git
+```
+
+Move into the repository:
+
+```bash
+cd SMARAN_Asymptotics_SIH26003
+```
+
+### Step 2: Open the Flutter Project
+
+```bash
+cd "Smaran(Flutter-Dart)"
+```
+
+### Step 3: Install Dependencies
+
+```bash
+flutter pub get
+```
+
+### Step 4: Check Available Devices
+
+```bash
+flutter devices
+```
+
+### Step 5: Run the Application
+
+```bash
+flutter run
+```
+
+### Step 6: Run Static Analysis
+
+```bash
+flutter analyze
+```
+
+### Step 7: Run Automated Tests
+
+```bash
+flutter test
+```
+
+Automated tests should be added for critical workflows, including authentication, reminders, local persistence, role-based access, and offline behavior.
+
+### Troubleshooting
+
+If dependencies or generated Flutter files become inconsistent, try:
+
+```bash
+flutter clean
+flutter pub get
+```
+
+Then run:
+
+```bash
+flutter run
+```
+
+**Note:** Cleaning removes generated build artifacts and may require a longer rebuild. It does not replace the need to diagnose platform-specific dependency or configuration errors.
+
+---
+
+## 📊 14. Implementation Status
+
+SMARAN combines an implemented Flutter application with a broader proposed architecture. The status of individual capabilities must be confirmed against the current source code and tested behavior.
+
+The following checklist is a starting point for the team to maintain.
+
+| Capability | Status |
+|---|---|
+| Flutter/Dart application | Existing application source included in the repository |
+| Patient, family, and caregiver workflows | Verify current implementation |
+| Cognitive games | Verify individual game implementations |
+| Adaptive difficulty | Verify logic and testing |
+| Family memory assistance | Verify data model and user workflow |
+| Face recognition | Verify model integration and on-device operation |
+| Multilingual voice input | Verify supported languages and runtime |
+| Language translation | Verify integration and language coverage |
+| Text-to-speech | Verify supported languages and offline operation |
+| Local reminders | Verify scheduling, permissions, and reliability |
+| Local database | Verify schema, persistence, and encryption |
+| Offline synchronization | Verify queue, retry, and conflict handling |
+| Caregiver dashboard | Verify data flow and available reports |
+| Healthcare-system integration | Verify separately; do not assume availability |
+
+Update this table as each feature is implemented and validated.
+
+A feature should be marked complete only when its code, dependencies, configuration, and expected behavior have been verified.
+
+---
+
+## 🔭 15. Future Scope
+
+Potential future development areas include the following, subject to technical feasibility, validation, and project priorities.
+
+### 15.1 Expanded Regional-Language Support
+
+Improve recognition, translation, and spoken-response quality for languages used across the North Eastern Region.
+
+### 15.2 Improved On-Device AI
+
+Optimize supported models for memory usage, inference speed, battery consumption, and operation on affordable Android devices.
+
+### 15.3 Personalized Cognitive Activities
+
+Explore validated approaches for selecting activities based on user preferences, accessibility needs, and interaction history.
+
+### 15.4 Richer Family Memory Experiences
+
+Extend personal memory collections with photographs, names, relationships, stories, and optional voice recordings.
+
+### 15.5 Caregiver Reports
+
+Provide clear, privacy-conscious summaries of activity, reminders, and changes that caregivers may need to review.
+
+### 15.6 Improved Offline Synchronization
+
+Develop robust retry behavior, conflict resolution, secure transfer, and clear synchronization status.
+
+### 15.7 Clinical and Healthcare Integration
+
+Explore appropriate integration with healthcare systems, subject to technical compatibility, permissions, applicable standards, and regulatory requirements.
+
+### 15.8 Validation and Evaluation
+
+Evaluate usability, accessibility, language quality, reliability, privacy, and safety with appropriate participants and oversight before making claims about clinical benefit.
+
+---
+
+## ⚠️ 16. Responsible Use Disclaimer
+
+SMARAN is intended to support cognitive engagement, memory assistance, daily routines, and coordination between patients and their authorized support networks.
+
+It is **not a replacement for professional medical advice, diagnosis, treatment, or emergency services**.
+
+Cognitive-game scores, interaction patterns, facial-recognition results, and AI-generated responses should not be treated as definitive medical conclusions.
+
+Medication schedules and other clinically important instructions should be verified by an appropriate healthcare professional or authorized caregiver.
+
+Any clinical deployment requires appropriate evaluation, privacy safeguards, security testing, and compliance with applicable requirements.
+
+---
+
+## 👥 17. Team
+
+<div align="center">
+
+### Team Asymptotics
+
+**Team ID: 149420**
+
+**Smart India Hackathon — Problem Statement SIH26003**
+
+*SMARAN — Ek Ehsaas, Yaadon Ke Paas.*
+
+**Technology in Service of Dignity**
+
+</div>
+
+---
+
+<div align="center">
+
+**Built with empathy. Designed for accessibility. Focused on dignity.**
+
+</div>
