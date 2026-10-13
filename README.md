@@ -1,6 +1,10 @@
 # SMARAN — Multimodal AI Platform for Cognitive & Elderly Care
 
 <p align="center">
+  <img src="smaran-splash-logo.png" alt="SMARAN Logo" width="280"/>
+</p>
+
+<p align="center">
   <strong>Ek Ehsaas, Yaadon Ke Paas</strong><br/>
   <em>Technology in Service of Dignity</em>
 </p>
