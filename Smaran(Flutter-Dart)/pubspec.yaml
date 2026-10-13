@@ -1,0 +1,54 @@
+name: smaran_flutter
+description: Smaran - dementia-friendly memory assistance platform.
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.13.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.5.3
+  audioplayers: ^6.5.0
+  local_auth: ^2.3.0
+  flutter_tts: ^4.2.3
+  android_alarm_manager_plus: ^5.1.1
+  flutter_local_notifications: ^22.3.0
+  timezone: 0.11.1
+  flutter_svg: ^2.0.10
+  font_awesome_flutter: ^10.7.0
+  speech_to_text: ^7.0.0
+  url_launcher: ^6.3.0
+  http: ^1.2.0
+  qr_flutter: ^4.1.0
+  mobile_scanner: ^5.2.3
+  pdf: ^3.11.1
+  printing: ^5.13.1
+  image_picker: ^1.1.2
+  camera: ^0.12.1
+  google_mlkit_face_detection: ^0.13.0
+  tflite_flutter: ^0.11.0
+  image: ^4.2.0
+  permission_handler: ^11.3.1
+  flutter_secure_storage: ^9.2.2
+
+  # Radio architecture
+  just_audio: ^0.9.42
+  just_audio_background: ^0.0.1-beta.13
+  audio_session: ^0.1.21
+  path_provider: ^2.1.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/audio/
+    - assets/icons/
+    - assets/models/
