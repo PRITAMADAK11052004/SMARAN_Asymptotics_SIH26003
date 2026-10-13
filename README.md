@@ -1,13 +1,13 @@
 # SMARAN — Multimodal AI Platform for Cognitive & Elderly Care
 
-\<p align="center">
-&#x20; \<strong>Ek Ehsaas, Yaadon Ke Paas\</strong>\<br/>
-&#x20; \<em>Technology in Service of Dignity\</em>
-\</p>
+<p align="center">
+  <strong>Ek Ehsaas, Yaadon Ke Paas</strong><br/>
+  <em>Technology in Service of Dignity</em>
+</p>
 
-\<p align="center">
-&#x20; An offline-first, AI-powered cognitive assistance and memory support platform designed for elderly people living with dementia and cognitive impairment, with a focus on the North Eastern Region (NER) of India.
-\</p>
+<p align="center">
+  An offline-first, AI-powered cognitive assistance and memory support platform designed for elderly people living with dementia and cognitive impairment, with a focus on the North Eastern Region (NER) of India.
+</p>
 
 ---
 
