@@ -3,10 +3,11 @@
 <p align="center">
   <img src="smaran-splash-logo.png" alt="SMARAN Logo" width="280"/>
 </p>
-
-<p align="center">
-  An offline-first, AI-powered cognitive assistance and memory support platform designed for elderly people living with dementia and cognitive impairment, with a focus on the North Eastern Region (NER) of India.
-</p>
+<blockquote>
+  <strong>
+    An offline-first, AI-powered cognitive assistance and memory support platform designed for elderly people living with dementia and cognitive impairment, with a focus on the North Eastern Region (NER) of India.
+  </strong>
+</blockquote>
 
 ---
 
