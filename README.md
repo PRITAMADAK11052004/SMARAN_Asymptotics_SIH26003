@@ -899,6 +899,6 @@ Explore the SMARAN project resources below. Availability may depend on the shari
 
 **Built with empathy. Designed for accessibility. Focused on dignity.**
 
-*SMARAN — Technology in Service of Dignity.*
+*SMARAN — ek ehsaas, yaadon ke pass.*
 
 </div>
