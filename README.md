@@ -22,7 +22,7 @@
 
 ---
 
-## 📌 At A Glance
+##  At A Glance
 
 | Field | Details |
 |---|---|
@@ -38,7 +38,7 @@
 
 ---
 
-## 📖 Table of Contents
+##  Table of Contents
 
 - [1. Overview](#-1-overview)
 - [2. Problem Statement](#-2-problem-statement)
@@ -61,7 +61,7 @@
 
 ---
 
-## 🌿 1. Overview
+##  1. Overview
 
 **SMARAN** is an offline-first, AI-powered cognitive assistance and memory support platform proposed for older adults living with dementia or cognitive impairment, particularly in the North Eastern Region (NER) of India.
 
@@ -87,7 +87,7 @@ The long-term goal is to make essential patient-facing functionality available l
 
 ---
 
-## 🎯 2. Problem Statement
+##  2. Problem Statement
 
 ### Problem Statement ID: SIH26003
 
@@ -117,7 +117,7 @@ To develop a unified cognitive assistance and memory support platform that combi
 
 ---
 
-## 💡 3. Our Solution
+##  3. Our Solution
 
 SMARAN proposes an integrated platform connecting cognitive engagement, memory assistance, voice interaction, and everyday care. The design centers on the relationship between the person using the application, their personal context, and the people supporting them.
 
@@ -137,7 +137,7 @@ These capabilities are intended to share relevant patient context through a loca
 
 ---
 
-## 🧠 4. Core Features
+##  4. Core Features
 
 ### 4.1 Adaptive Cognitive Engagement
 
@@ -241,7 +241,7 @@ Access should be limited to authorized users and follow appropriate privacy, ret
 
 ---
 
-## 🏗️ 5. System Architecture
+##  5. System Architecture
 
 SMARAN is designed around a Flutter/Dart application, local data storage, modular assistance services, and optional synchronization. The proposed architecture separates user interaction, application features, local persistence, AI processing, and remote services.
 
@@ -297,7 +297,7 @@ Not every role or feature should be assumed to be fully implemented merely becau
 
 ---
 
-## 🗣️ 6. Multimodal AI Pipeline
+##  6. Multimodal AI Pipeline
 
 SMARAN proposes a modular AI pipeline for multilingual interaction, personalized responses, visual recognition, and cognitive-activity analysis. Each component must be evaluated for compatibility, privacy, latency, reliability, and performance on supported devices.
 
@@ -376,7 +376,7 @@ The AI component is intended to support contextual assistance, personalized inte
 
 ---
 
-## ⚙️ 7. Technical Implementation
+##  7. Technical Implementation
 
 This section describes the proposed implementation approach. Feature availability depends on the source code, configured dependencies, device support, and completed tests.
 
@@ -434,7 +434,7 @@ Database encryption requires correct configuration and secure key management. Us
 
 ---
 
-## 📡 8. Offline-First Architecture
+##  8. Offline-First Architecture
 
 Offline-first operation is a central design goal of SMARAN. The application should keep essential patient-facing functionality available without requiring continuous internet access wherever the feature and its dependencies support offline execution.
 
@@ -480,7 +480,7 @@ The application should communicate these limitations clearly.
 
 ---
 
-## 🔐 9. User Roles and Workflows
+##  9. User Roles and Workflows
 
 ### 9.1 Patient Workflow
 
@@ -539,7 +539,7 @@ Any clinical workflow must define its intended use, access permissions, validati
 
 ---
 
-## ♿ 10. Privacy, Safety, and Accessibility
+##  10. Privacy, Safety, and Accessibility
 
 SMARAN is intended for a sensitive use case involving older adults and personal health-related information. Privacy and usability must therefore be treated as core design requirements.
 
@@ -596,7 +596,7 @@ Potential alerts should prompt human review rather than present definitive medic
 
 ---
 
-## 🧰 11. Technology Stack
+##  11. Technology Stack
 
 The table below summarizes the **proposed** technology stack. These entries describe the target architecture and should not be interpreted as confirmation that every component is integrated into the current application.
 
@@ -622,7 +622,7 @@ The table below summarizes the **proposed** technology stack. These entries desc
 
 ---
 
-## 📂 12. Repository Structure
+##  12. Repository Structure
 
 The repository contains the Flutter/Dart application and supporting project resources. The following tree is a high-level guide; it is not an exhaustive listing of every file.
 
@@ -683,7 +683,7 @@ Some files or directories may change as the project evolves. Confirm the current
 
 ---
 
-## 🚀 13. Getting Started
+##  13. Getting Started
 
 These instructions describe the typical Flutter development workflow. Exact setup requirements may vary by platform and by the current state of the project.
 
@@ -772,7 +772,7 @@ flutter run
 
 ---
 
-## 📊 14. Implementation Status
+##  14. Implementation Status
 
 SMARAN combines an existing Flutter application codebase with a broader proposed architecture. The status of individual capabilities should be maintained against the current source code and verified behavior. The table below is a **verification checklist**, not a claim that all features are complete.
 
@@ -797,7 +797,7 @@ Update this table as each feature is implemented and validated. Mark a feature c
 
 ---
 
-## 🔭 15. Future Scope
+##  15. Future Scope
 
 Potential future development areas include the following, subject to technical feasibility, validation, and project priorities.
 
@@ -835,7 +835,7 @@ Evaluate usability, accessibility, language quality, reliability, privacy, and s
 
 ---
 
-## ⚠️ 16. Responsible Use Disclaimer
+##  16. Responsible Use Disclaimer
 
 SMARAN is intended to support cognitive engagement, memory assistance, daily routines, and coordination between patients and their authorized support networks.
 
@@ -847,7 +847,7 @@ Any clinical deployment requires appropriate evaluation, privacy safeguards, sec
 
 ---
 
-## 📚 17. Research and References
+##  17. Research and References
 
 The following publications provide background for digital cognitive assessment, smartphone interaction measures, cognitive control, and attention. They are **research context**, not evidence that SMARAN itself is clinically validated or effective.
 
@@ -883,7 +883,7 @@ The following publications provide background for digital cognitive assessment, 
 
 ---
 
-## 🔗 18. Demonstration Links
+##  18. Demonstration Links
 
 Explore the SMARAN project resources below. Availability may depend on the sharing settings of each external service.
 
