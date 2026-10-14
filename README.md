@@ -24,21 +24,19 @@
 
 ---
 
-## 📌 Project Information
+## 📌 At A Glance
 
 | Field | Details |
 |---|---|
-| **Project Name** | SMARAN |
-| **Project Category** | Software / Hardware |
-| **Problem Statement ID** | SIH26003 |
+| **Project Name** | SMARAN ~ Multimodal AI Platform for Cognitive & Elderly Care |
+| **PS ID** | SIH26003 |
 | **Problem Statement Title** | AI-Based Cognitive Gaming and Memory Assistance Platform for Elderly Dementia Patients in North Eastern Region (NER) |
+| **Organization** | Ministry of Development of North Eastern Region (MDoNER) |
+| **Department** | 	Ministry of Development of North Eastern Region (MDoNER) |
+| **Project Category** | Software |
 | **Theme** | MedTech / BioTech / HealthTech |
 | **Team ID** | 149420 |
 | **Team Name** | Asymptotics |
-| **Development Framework** | Flutter |
-| **Programming Language** | Dart |
-| **Primary Focus** | Cognitive engagement, memory assistance, multilingual interaction, and connected care |
-| **Target Region** | North Eastern Region of India |
 
 ---
 
@@ -60,7 +58,8 @@
 - [14. Implementation Status](#-14-implementation-status)
 - [15. Future Scope](#-15-future-scope)
 - [16. Responsible Use Disclaimer](#-16-responsible-use-disclaimer)
-- [17. Team](#-17-team)
+- [17. Research & Referencesv](#-17-research-and-references)
+- [18. Demonstration Links](#-18-demonstration-links)
 
 ---
 
@@ -876,19 +875,35 @@ Any clinical deployment requires appropriate evaluation, privacy safeguards, sec
 
 ---
 
-## 👥 17. Team
+## 👥 17. Research & References
+
+1. Digital Cognitive Monitoring  -  Smartphone interactions can provide non-invasive digital biomarkers for monitoring cognitive changes.
+   Link: https://pmc.ncbi.nlm.nih.gov/articles/PMC10296416/
+2. Keystroke Dynamics - Keystroke patterns can indicate cognitive and motor changes, supporting behavioural monitoring.
+   Link: https://www.nature.com/articles/s41598-022-11865-7
+3. AI-Based Cognitive Assessment - Touchscreen typing and language features show potential for identifying Mild Cognitive Impairment.
+   Link: https://www.frontiersin.org/journals/digital-health/articles/10.3389/fdgth.2020.567158/full
+4. Smartphone-Based Screening - Research supports smartphone-derived keystroke dynamics as a scalable approach for cognitive screening.
+   Link: https://www.sgecm.org.tw/DB/ijge/29/1645.pdf
+5. Mobile Digital Biomarkers - Smartphone keystroke data shows potential for distinguishing cognitive impairment from healthy ageing.
+    Link: https://www.jmir.org/2024/1/e59247/ References
+6. Cognitive Control – Supports attention and decision-making in cognitive games.
+    Link: https://doi.org/10.1146/annurev-psych-022024-103901
+7.Cognitive Control – Supports information processing during gameplay.
+    Link: https://doi.org/10.3389/fnhum.2014.00680
+8. Attention System – Supports attention-based cognitive activities.
+    Link: https://doi.org/10.1146/annurev.ne.13.030190.000325
+
+---
+## 👥 18. Demonstration Links
 
 <div align="center">
 
-### Team Asymptotics
-
-**Team ID: 149420**
-
-**Smart India Hackathon — Problem Statement SIH26003**
-
-*SMARAN — Ek Ehsaas, Yaadon Ke Paas.*
-
-**Technology in Service of Dignity**
+Video Link - https://youtube.com/playlist?list=PLcEUKOfNFoZo&si=j2jon2amrOGonTki
+Github Link - https://github.com/PRITAMADAK11052004/SMARAN_Asymptotics_SIH26003.git 
+Research-Drive Link -  https://drive.google.com/drive/folders/1PssjNUIT3JfrFLfRsKvz5GLMw-7LTdwx 
+WEB APP LINK : https://asymptotics.vercel.app/ 
+APP LINK : https://drive.google.com/file/d/12pcJEIlEX31o_eIWzpi2civfenyrvXIM/view?usp=drivesdk
 
 </div>
 
