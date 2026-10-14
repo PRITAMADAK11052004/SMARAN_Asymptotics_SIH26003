@@ -887,7 +887,7 @@ The following publications provide background for digital cognitive assessment, 
 
 Explore the SMARAN project resources below. Availability may depend on the sharing settings of each external service.
 
-- 🎥 **Demo Video Playlist:** [Watch on YouTube](https://youtube.com/playlist?list=PLcLUKOfNfoZo8csi-j2jon2amrOGonTki)
+- 🎥 **Demo Video Playlist:** [Watch on YouTube](https://youtube.com/playlist?list=PLcEUKOfNFoZo&si=gX4fkZpy3yEuFvFt)
 - 💻 **GitHub Repository:** [View the source code](https://github.com/PRITAMADAK11052004/SMARAN_Asymptotics_SIH26003)
 - 🔬 **Research Drive:** [Open research materials](https://drive.google.com/drive/folders/1PssjNUIT3JfrLFRsKvZ5GLMw-7LTdwx)
 - 🌐 **Web App:** [Visit the web demo](https://asymptotics.vercel.app/)
