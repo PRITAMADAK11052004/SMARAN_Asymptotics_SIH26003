@@ -3,7 +3,7 @@
 # SMARAN
 ### Multimodal AI Platform for Cognitive & Elderly Care
 
-<img src="xyz.png" alt="SMARAN Logo" width="220"/>
+<img src="smaran-logo.png" alt="SMARAN Logo" width="220"/>
 
 <p>
   <strong>
