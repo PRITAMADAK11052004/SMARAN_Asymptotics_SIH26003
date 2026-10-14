@@ -875,37 +875,59 @@ Any clinical deployment requires appropriate evaluation, privacy safeguards, sec
 
 ---
 
-## 👥 17. Research & References
+## 🔭 17. Research & References
 
-1. Digital Cognitive Monitoring  -  Smartphone interactions can provide non-invasive digital biomarkers for monitoring cognitive changes.
-   Link: https://pmc.ncbi.nlm.nih.gov/articles/PMC10296416/
-2. Keystroke Dynamics - Keystroke patterns can indicate cognitive and motor changes, supporting behavioural monitoring.
-   Link: https://www.nature.com/articles/s41598-022-11865-7
-3. AI-Based Cognitive Assessment - Touchscreen typing and language features show potential for identifying Mild Cognitive Impairment.
-   Link: https://www.frontiersin.org/journals/digital-health/articles/10.3389/fdgth.2020.567158/full
-4. Smartphone-Based Screening - Research supports smartphone-derived keystroke dynamics as a scalable approach for cognitive screening.
-   Link: https://www.sgecm.org.tw/DB/ijge/29/1645.pdf
-5. Mobile Digital Biomarkers - Smartphone keystroke data shows potential for distinguishing cognitive impairment from healthy ageing.
-    Link: https://www.jmir.org/2024/1/e59247/ References
-6. Cognitive Control – Supports attention and decision-making in cognitive games.
-    Link: https://doi.org/10.1146/annurev-psych-022024-103901
-7.Cognitive Control – Supports information processing during gameplay.
-    Link: https://doi.org/10.3389/fnhum.2014.00680
-8. Attention System – Supports attention-based cognitive activities.
-    Link: https://doi.org/10.1146/annurev.ne.13.030190.000325
+1. Digital Cognitive Monitoring — Smartphone Interactions
+Digital cognitive monitoring may provide non-invasive digital biomarkers for tracking cognitive changes.
+Reference: https://pmc.ncbi.nlm.nih.gov/articles/PMC10294614/
+
+2. Keystroke Dynamics
+Keystroke patterns may indicate cognitive and motor changes, supporting behavioural monitoring.
+Reference: https://www.nature.com/articles/s41598-022-11865-7
+
+3. AI-Based Cognitive Assessment
+Touchscreen typing and language features show potential for identifying mild cognitive impairment.
+Reference: https://www.frontiersin.org/journals/digital-health/articles/10.3389/fdgth.2020.567158/full
+
+4. Smartphone-Based Screening
+Research explores smartphone-derived keystroke dynamics as a scalable approach to cognitive screening.
+Reference: https://www.sgecm.org.tw/DB/ijge/29/1645.pdf
+
+5. Mobile Digital Biomarkers
+Smartphone keystroke data may help distinguish cognitive impairment from healthy ageing.
+Reference: https://www.jmir.org/2024/1/e59247/
+
+6. Cognitive Control and Decision-Making
+Research on cognitive control supports the study of attention and decision-making in cognitive activities.
+Reference: https://doi.org/10.1146/annurev-psych-022024-103901
+
+7. Cognitive Control and Information Processing
+Research explores cognitive control in information processing during gameplay.
+Reference: https://doi.org/10.3389/fnhum.2014.00680
+
+8. Attention Systems
+Research on attention systems provides background for designing attention-focused cognitive activities.
+Reference: https://doi.org/10.1146/annurev.ne.13.030190.000325
 
 ---
-## 👥 18. Demonstration Links
+## 🔗 18. Demonstration Links
 
-<div align="center">
+Explore the SMARAN project resources below.
 
-Video Link - https://youtube.com/playlist?list=PLcEUKOfNFoZo&si=j2jon2amrOGonTki
-Github Link - https://github.com/PRITAMADAK11052004/SMARAN_Asymptotics_SIH26003.git 
-Research-Drive Link -  https://drive.google.com/drive/folders/1PssjNUIT3JfrFLfRsKvz5GLMw-7LTdwx 
-WEB APP LINK : https://asymptotics.vercel.app/ 
-APP LINK : https://drive.google.com/file/d/12pcJEIlEX31o_eIWzpi2civfenyrvXIM/view?usp=drivesdk
+🎥 Demo Video Playlist:
+https://youtube.com/playlist?list=PLcLUKOfNfoZo8csi-j2jon2amrOGonTki
 
-</div>
+💻 GitHub Repository:
+https://github.com/PRITAMADAK11052004/SMARAN_Asymptotics_SIH26003
+
+🔬 Research Drive:
+https://drive.google.com/drive/folders/1PssjNUIT3JfrLFRsKvZ5GLMw-7LTdwx
+
+🌐 Web App:
+https://asymptotics.vercel.app/
+
+📱 App Demo:
+https://drive.google.com/file/d/12pcJEIIEX31o_eIWZpi2civfenyrvXIM/view?usp=drivesdk
 
 ---
 
