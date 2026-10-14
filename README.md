@@ -22,8 +22,6 @@
 
 ---
 
-## 📌 At a Glance
-
 ## 📌 At A Glance
 
 | Field | Details |
